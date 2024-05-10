@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des appartements{% endblock %}
+
+{% block body %}
+ 
+     <main id="main" class="main">
+
+    <h1>Liste des appartements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numéro d'appartement</th>
+                <th>Nom du résident</th>
+                <th>Taille</th>
+                <th>Nombre d'étages</th>
+                <th>Statut de l'appartement</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for appartement in appartements %}
+            <tr>
+                <td>{{ appartement.numappartement }}</td>
+                <td>{{ appartement.nomresident }}</td>
+                <td>{{ appartement.taille }}</td>
+                <td>{{ appartement.nbretage }}</td>
+                <td>{{ appartement.statutappartement }}</td>
+                <td>
+                    <a href="{{ path('app_appartement_show', {'idAppartement': appartement.idappartement}) }}">Voir</a>
+                    <a href="{{ path('app_appartement_edit', {'idAppartement': appartement.idappartement}) }}">Modifier</a>
+                      <a href="{{ path('app_appartement_delete', {'idAppartement': appartement.idappartement}) }}">Supprimer</a>
+{% for appartement in appartements %}
+    <div>
+        <a href="{{ path('app_appartement_factures', {'idAppartement': appartement.idAppartement}) }}">Voir les factures</a>
+    </div>
+{% endfor %}
+
+
+    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_appartement_new') }}">Créer un nouvel appartement</a>
+        </main><!-- End #main -->
+
+
+{% endblock %}
